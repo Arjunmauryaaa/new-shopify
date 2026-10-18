@@ -1,0 +1,257 @@
+{{ 'af-theme.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="af-scope color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" id="reviews">
+  <div class="page-width">
+    <div class="af-heading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="af-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      <h2 class="h1">{{ section.settings.heading | escape }}</h2>
+    </div>
+
+    <div class="af-reviews-layout">
+      <div class="af-reviews-summary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        <div class="af-reviews-summary__score">
+          <span class="af-reviews-summary__score-value">{{ section.settings.average_rating }}</span>
+          <span class="af-reviews-summary__score-max">/ 5</span>
+        </div>
+        {%- render 'af-star-rating', rating: section.settings.average_rating -%}
+        <p class="af-reviews-summary__count">
+          Based on {{ section.settings.review_count }} reviews
+        </p>
+
+        <div class="af-breakdown">
+          {%- assign af_breakdown = '5,4,3,2,1' | split: ',' -%}
+          {%- for af_star in af_breakdown -%}
+            {%- liquid
+              case af_star
+                when '5'
+                  assign af_percent = section.settings.percent_5
+                when '4'
+                  assign af_percent = section.settings.percent_4
+                when '3'
+                  assign af_percent = section.settings.percent_3
+                when '2'
+                  assign af_percent = section.settings.percent_2
+                else
+                  assign af_percent = section.settings.percent_1
+              endcase
+            -%}
+            <div class="af-breakdown-row">
+              <span>{{ af_star }} ★</span>
+              <span class="af-breakdown-row__track">
+                <span class="af-breakdown-row__fill" style="width: {{ af_percent }}%;"></span>
+              </span>
+              <span>{{ af_percent }}%</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div
+        class="af-review-cards"
+        {% if settings.animations_reveal_on_scroll %}
+          data-cascade
+        {% endif %}
+      >
+        {%- for block in section.blocks -%}
+          <div
+            class="af-review-card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+            style="--animation-order: {{ forloop.index }};"
+            {{ block.shopify_attributes }}
+          >
+            {%- render 'af-star-rating', rating: block.settings.rating -%}
+            {%- if block.settings.title != blank -%}
+              <p class="af-review-card__title">{{ block.settings.title | escape }}</p>
+            {%- endif -%}
+            <p class="af-review-card__body">&ldquo;{{ block.settings.body }}&rdquo;</p>
+            <p class="af-review-card__author">
+              {{ block.settings.author | escape }}
+              {%- if block.settings.verified -%}
+                <span class="af-review-card__author-verified">Verified Buyer</span>
+              {%- endif -%}
+            </p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AF Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Social Proof"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved by Thousands"
+    },
+    {
+      "type": "paragraph",
+      "content": "Demo summary numbers below — replace with real data, or connect a reviews app (Judge.me, Loox, etc.) and swap this section for its review widget."
+    },
+    {
+      "type": "number",
+      "id": "average_rating",
+      "label": "Average rating",
+      "default": 4.8
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 2438
+    },
+    {
+      "type": "range",
+      "id": "percent_5",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "5 star %",
+      "default": 82
+    },
+    {
+      "type": "range",
+      "id": "percent_4",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "4 star %",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "percent_3",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "3 star %",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "percent_2",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "2 star %",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "percent_1",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "1 star %",
+      "default": 1
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review text",
+          "default": "Absolutely love the quality. It feels much more premium than I expected."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Sarah M."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show \"Verified Buyer\"",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "AF Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "rating": 5, "title": "Absolutely love the quality.", "body": "It feels much more premium than I expected, and it arrived faster than the estimate.", "author": "Sarah M.", "verified": true } },
+        { "type": "review", "settings": { "rating": 5, "title": "Exceeded expectations", "body": "The fit guide was accurate and the packaging alone felt like a luxury unboxing.", "author": "James K.", "verified": true } },
+        { "type": "review", "settings": { "rating": 4, "title": "Great everyday piece", "body": "Comfortable from day one and holding up well after a few weeks of daily use.", "author": "Priya R.", "verified": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

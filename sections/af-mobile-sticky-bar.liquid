@@ -1,0 +1,68 @@
+{{ 'af-theme.css' | asset_url | stylesheet_tag }}
+
+{%- if product != blank -%}
+  {%- assign af_variant = product.selected_or_first_available_variant -%}
+  <div class="af-sticky-bar" data-af-sticky-bar hidden>
+    <div class="af-sticky-bar__info">
+      <p class="af-sticky-bar__title">{{ product.title | escape }}</p>
+      <p class="af-sticky-bar__price" data-af-sticky-price>
+        {{- af_variant.price | money -}}
+      </p>
+    </div>
+
+    <product-form class="af-sticky-bar__form product-form" data-section-id="{{ section.id }}" data-hide-errors="true">
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="product-form__error-message"></span>
+      </div>
+      {%- form 'product', product, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ af_variant.id }}"
+          class="product-variant-id"
+          data-af-sticky-variant-input
+          {% if af_variant == null or af_variant.available == false %}
+            disabled
+          {% endif %}
+        >
+        <button
+          type="submit"
+          name="add"
+          class="af-sticky-bar__button button button--primary"
+          data-af-sticky-button
+          {% if af_variant == null or af_variant.available == false %}
+            disabled
+          {% endif %}
+        >
+          <span>
+            {%- if af_variant == null -%}
+              {{ 'products.product.unavailable' | t }}
+            {%- elsif af_variant.available == false -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- endif -%}
+          </span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      {%- endform -%}
+    </product-form>
+  </div>
+
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'af-sticky-bar.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AF Mobile sticky bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "AF Mobile sticky bar"
+    }
+  ]
+}
+{% endschema %}

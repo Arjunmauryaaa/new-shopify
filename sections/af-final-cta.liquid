@@ -1,0 +1,78 @@
+{{ 'af-theme.css' | asset_url | stylesheet_tag }}
+
+<div class="af-scope color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="af-final-cta{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      <h2 class="h1">{{ section.settings.heading | escape }}</h2>
+      {%- if product != blank -%}
+        <p class="af-final-cta__price">{{ product.selected_or_first_available_variant.price | money }}</p>
+      {%- endif -%}
+      <div class="af-final-cta__button">
+        {%- if product != blank and product.selected_or_first_available_variant != null -%}
+          <product-form class="product-form" data-section-id="{{ section.id }}">
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+              <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+              <span class="product-form__error-message"></span>
+            </div>
+            {%- form 'product', product, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ product.selected_or_first_available_variant.id }}"
+                class="product-variant-id"
+                {% if product.selected_or_first_available_variant.available == false %}
+                  disabled
+                {% endif %}
+              >
+              <button
+                type="submit"
+                name="add"
+                class="product-form__submit button button--primary button--full-width"
+                {% if product.selected_or_first_available_variant.available == false %}
+                  disabled
+                {% endif %}
+              >
+                <span>
+                  {%- if product.selected_or_first_available_variant.available == false -%}
+                    {{ 'products.product.sold_out' | t }}
+                  {%- else -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {%- endif -%}
+                </span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            {%- endform -%}
+          </product-form>
+          <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AF Final CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready to experience it?"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme-6",
+      "label": "Color scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AF Final CTA"
+    }
+  ]
+}
+{% endschema %}

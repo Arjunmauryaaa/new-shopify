@@ -1,0 +1,58 @@
+/* Editorial workspace storefront refresh */
+:root {
+  --color-foreground: 32, 42, 37;
+  --color-background: 248, 247, 242;
+  --gradient-background: #f8f7f2;
+  --color-button: 44, 66, 54;
+  --color-button-text: 255, 255, 255;
+  --color-link: 70, 91, 75;
+}
+
+body { background: #f8f7f2; color: #202a25; }
+.utility-bar { background: #263b30; color: #f8f7f2; }
+.header-wrapper { border-bottom: 1px solid rgba(32, 42, 37, .12); }
+.header { max-width: 1440px; }
+.header__heading-link { letter-spacing: .08em; text-transform: uppercase; }
+.header__menu-item { font-size: 1.35rem; letter-spacing: .035em; }
+
+.banner { overflow: hidden; }
+.banner__media { background: #d9dfd2; }
+.banner__media img { filter: saturate(.82); }
+.banner__content { padding: 4rem 2rem; }
+.banner__box { max-width: 66rem; padding: clamp(2.4rem, 5vw, 5.6rem); }
+.banner__heading { max-width: 12ch; margin-inline: auto; font-size: clamp(4.2rem, 7.2vw, 8.4rem); line-height: .98; letter-spacing: -.045em; text-wrap: balance; }
+.banner__text { max-width: 48rem; margin: 1.6rem auto 0; font-size: clamp(1.5rem, 1.5vw, 1.8rem); line-height: 1.7; }
+.banner__buttons { margin-top: 2.6rem; }
+.button { min-height: 5rem; padding-inline: 2.8rem; border-radius: 999px; letter-spacing: .025em; transition: transform .2s ease, background-color .2s ease; }
+.button:hover { transform: translateY(-2px); }
+
+.shopify-section:has(.collection) { padding-block: 2rem; }
+.collection .title-wrapper-with-link { align-items: end; margin-bottom: 2.8rem; }
+.collection .title { max-width: 16ch; font-size: clamp(2.8rem, 4vw, 4.6rem); line-height: 1.05; letter-spacing: -.035em; }
+.collection .grid { row-gap: 3rem; }
+.card-wrapper { height: 100%; }
+.card__inner { border-radius: 1.2rem; overflow: hidden; background: #eeede7; }
+.card__media img { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.card-wrapper:hover .card__media img { transform: scale(1.045); }
+.card__heading { font-size: 1.5rem; line-height: 1.35; letter-spacing: .005em; }
+.price { font-size: 1.4rem; }
+
+.newsletter { background: #e9ece4; }
+.newsletter__wrapper { padding-block: 6rem; }
+.footer { background: #263b30; color: #f8f7f2; }
+.footer a, .footer__content-top, .footer__content-bottom { color: inherit; }
+.footer a:hover { color: #d6c89b; }
+
+@media screen and (max-width: 749px) {
+  .banner__content { padding: 1.8rem 1.4rem; }
+  .banner__box { padding: 2.4rem 1.8rem; }
+  .banner__heading { font-size: clamp(3.6rem, 12vw, 5.6rem); }
+  .banner__text { font-size: 1.45rem; }
+  .collection .title-wrapper-with-link { margin-bottom: 1.8rem; }
+  .collection .grid { row-gap: 2rem; }
+  .newsletter__wrapper { padding-block: 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

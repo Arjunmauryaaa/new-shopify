@@ -1,0 +1,353 @@
+/* AeroFlex premium landing page — shared styles for custom af-* sections.
+   Colors follow the section's chosen color scheme (rgb(var(--color-*)))
+   so the theme editor's scheme picker keeps working; --af-accent is a
+   fixed lime accent used for small highlights independent of scheme. */
+
+.af-scope {
+  --af-accent: #c8ff4d;
+  --af-accent-ink: #0a0a0a;
+}
+
+.af-eyebrow {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.af-heading {
+  margin: 0;
+  max-width: 40rem;
+}
+
+.af-heading--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Trust bar / shipping-returns shared icon-row layout */
+.af-icon-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem 2rem;
+  padding-block: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .af-icon-row {
+    grid-template-columns: repeat(var(--af-icon-row-count, 4), 1fr);
+  }
+}
+
+.af-icon-row--center {
+  text-align: center;
+}
+
+.af-icon-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.af-icon-row--center .af-icon-item {
+  align-items: center;
+}
+
+.af-icon-item .icon-with-text__item,
+.af-icon-item .svg-wrapper {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.af-icon-item svg {
+  width: 100%;
+  height: 100%;
+}
+
+.af-icon-item__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.af-icon-item__description {
+  font-size: 1.3rem;
+  opacity: 0.65;
+  margin: 0;
+}
+
+/* Features */
+.af-features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.6rem 3rem;
+  margin-top: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .af-features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.af-feature {
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+  padding-top: 1.6rem;
+}
+
+.af-feature__index {
+  display: block;
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.4;
+  margin-bottom: 0.8rem;
+}
+
+.af-feature__title {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+
+.af-feature__description {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  max-width: 32rem;
+  margin: 0;
+}
+
+/* Specifications */
+.af-spec-list {
+  max-width: 60rem;
+  margin: 4rem auto 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.af-spec-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.af-spec-row dt {
+  font-size: 1.4rem;
+  opacity: 0.6;
+}
+
+.af-spec-row dd {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Reviews */
+.af-reviews-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .af-reviews-layout {
+    grid-template-columns: minmax(24rem, 30rem) 1fr;
+  }
+}
+
+.af-reviews-summary__score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.af-reviews-summary__score-value {
+  font-size: 4.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.af-reviews-summary__score-max {
+  font-size: 1.8rem;
+  opacity: 0.5;
+}
+
+.af-reviews-summary__count {
+  margin: 0.8rem 0 0;
+  font-size: 1.3rem;
+  opacity: 0.6;
+}
+
+.af-rating-stars {
+  display: inline-flex;
+  gap: 0.2rem;
+}
+
+.af-star {
+  display: inline-flex;
+}
+
+.af-star svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+
+.af-star--muted {
+  opacity: 0.25;
+}
+
+.af-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 3rem;
+}
+
+.af-breakdown-row {
+  display: grid;
+  grid-template-columns: 3.6rem 1fr 3.6rem;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.75;
+}
+
+.af-breakdown-row__track {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: rgba(var(--color-foreground), 0.12);
+  overflow: hidden;
+}
+
+.af-breakdown-row__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: rgb(var(--color-foreground));
+}
+
+.af-review-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 700px) {
+  .af-review-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.af-review-card {
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 1.6rem;
+  padding: 2.4rem;
+}
+
+.af-review-card__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.2rem 0 0.6rem;
+}
+
+.af-review-card__body {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.af-review-card__author {
+  margin: 1.6rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.af-review-card__author-verified {
+  font-weight: 400;
+  opacity: 0.55;
+  margin-left: 0.4rem;
+}
+
+/* Final CTA */
+.af-final-cta {
+  text-align: center;
+  padding-block: 7rem;
+}
+
+.af-final-cta__price {
+  font-size: 1.8rem;
+  opacity: 0.75;
+  margin: 1.2rem 0 0;
+}
+
+.af-final-cta__button {
+  margin-top: 2.8rem;
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+/* Mobile sticky buy bar */
+.af-sticky-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.6rem;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  background: rgb(var(--color-background));
+  border-top: 1px solid rgba(var(--color-foreground), 0.12);
+  box-shadow: 0 -0.6rem 1.6rem rgba(0, 0, 0, 0.06);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.af-sticky-bar--visible {
+  transform: translateY(0);
+}
+
+@media screen and (min-width: 990px) {
+  .af-sticky-bar {
+    display: none;
+  }
+}
+
+.af-sticky-bar__info {
+  min-width: 0;
+  flex: 1;
+}
+
+.af-sticky-bar__title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.af-sticky-bar__price {
+  margin: 0.1rem 0 0;
+  font-size: 1.4rem;
+  opacity: 0.75;
+}
+
+.af-sticky-bar__form .form {
+  margin: 0;
+}
+
+.af-sticky-bar__button {
+  white-space: nowrap;
+}
