@@ -3,6 +3,635 @@
    so the theme editor's scheme picker keeps working; --af-accent is a
    fixed lime accent used for small highlights independent of scheme. */
 
+/* Brand system */
+:root {
+  --af-ink: #0b0f0d;
+  --af-paper: #f3f2ec;
+  --af-accent: #c8ff4d;
+  --af-muted: #9a9f99;
+}
+
+body {
+  letter-spacing: 0.015em;
+}
+
+.announcement-bar-section {
+  background: var(--af-ink);
+  color: #f8f8f3;
+}
+
+.announcement-bar-section .announcement-bar {
+  min-height: 3.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+}
+
+.header-wrapper {
+  border-bottom: 1px solid rgba(11, 15, 13, 0.08);
+}
+
+.header {
+  min-height: 7.2rem;
+}
+
+.header__heading-link,
+.header__menu-item {
+  letter-spacing: 0.025em;
+}
+
+.footer {
+  --color-foreground: 248, 248, 243;
+}
+
+.footer .footer__content-bottom {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.footer .field__input {
+  color: #f8f8f3;
+}
+
+/* Motion-led homepage hero */
+.af-orbit {
+  --af-tilt-x: 0deg;
+  --af-tilt-y: 0deg;
+  position: relative;
+  display: grid;
+  min-height: min(76rem, calc(100svh - 11rem));
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b0f0d;
+  color: #f6f6ef;
+}
+
+.af-orbit::before,
+.af-orbit::after {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+}
+
+.af-orbit::before {
+  top: 8%;
+  right: 2%;
+  width: min(65vw, 86rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 255, 77, 0.14), rgba(200, 255, 77, 0.035) 42%, transparent 70%);
+  filter: blur(2rem);
+}
+
+.af-orbit::after {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 22rem;
+  background: linear-gradient(0deg, rgba(200, 255, 77, 0.045), transparent);
+}
+
+.af-orbit__grid {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: 0.18;
+  background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 7.2rem 7.2rem;
+  mask-image: linear-gradient(90deg, transparent 4%, #000 55%, transparent 100%);
+}
+
+.af-orbit__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(38rem, 1.12fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 8rem);
+  width: 100%;
+  padding-block: clamp(6rem, 10vh, 11rem);
+}
+
+.af-orbit__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 59rem;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.7,.2,1);
+}
+
+.af-orbit__copy.af-motion-pending {
+  opacity: 0;
+  transform: translate3d(0, 2.4rem, 0);
+}
+
+.af-orbit__copy.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.af-orbit__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2.4rem;
+  color: var(--af-accent);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.af-orbit__eyebrow span,
+.af-orbit__note-mark {
+  display: inline-grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+}
+
+.af-orbit__eyebrow span {
+  width: 2.8rem;
+  height: 1px;
+  background: var(--af-accent);
+}
+
+.af-orbit__title {
+  max-width: 65rem;
+  margin: 0;
+  color: #f8f8f3;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(5rem, 7.6vw, 11rem);
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  line-height: 0.94;
+  text-wrap: balance;
+  white-space: pre-line;
+}
+
+.af-orbit__description {
+  max-width: 42rem;
+  margin-top: 2.5rem;
+  color: rgba(248, 248, 243, 0.66);
+  font-size: clamp(1.55rem, 1.45vw, 1.9rem);
+  line-height: 1.65;
+}
+
+.af-orbit__description p {
+  margin: 0;
+}
+
+.af-orbit__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+  margin-top: 3.4rem;
+}
+
+.af-orbit__button {
+  display: inline-flex;
+  min-height: 5.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  padding: 0 2.4rem;
+  border: 1px solid var(--af-accent);
+  border-radius: 999px;
+  background: var(--af-accent);
+  color: var(--af-ink);
+  font-size: 1.4rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.af-orbit__button:hover {
+  transform: translateY(-0.3rem);
+  background: transparent;
+  color: var(--af-accent);
+  box-shadow: 0 1.2rem 4rem rgba(200, 255, 77, 0.12);
+}
+
+.af-orbit__button span {
+  font-size: 1.8rem;
+  transition: transform .25s ease;
+}
+
+.af-orbit__button:hover span {
+  transform: translate(0.3rem, -0.3rem);
+}
+
+.af-orbit__text-link {
+  color: rgba(248,248,243,.76);
+  font-size: 1.35rem;
+  text-decoration-color: rgba(248,248,243,.35);
+  text-underline-offset: 0.5rem;
+}
+
+.af-orbit__text-link:hover {
+  color: var(--af-accent);
+}
+
+.af-orbit__note {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 5rem;
+  color: rgba(248,248,243,.55);
+  font-size: 1.15rem;
+  letter-spacing: .025em;
+}
+
+.af-orbit__note-mark {
+  color: var(--af-accent);
+  font-size: 1.7rem;
+}
+
+.af-orbit__stage {
+  position: relative;
+  display: grid;
+  min-height: 57rem;
+  place-items: center;
+  perspective: 110rem;
+  transform-style: preserve-3d;
+}
+
+.af-orbit__halo {
+  position: absolute;
+  width: min(88%, 60rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(200,255,77,.16);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10rem rgba(200,255,77,.04), 0 0 10rem rgba(200,255,77,.035);
+}
+
+.af-orbit__halo--one {
+  animation: af-halo-breathe 7s ease-in-out infinite alternate;
+}
+
+.af-orbit__halo--two {
+  width: 70%;
+  border-color: rgba(255,255,255,.11);
+  transform: rotateX(68deg) rotateZ(-20deg);
+}
+
+.af-orbit__orbit {
+  position: absolute;
+  width: 100%;
+  height: 26rem;
+  border: 1px solid rgba(200,255,77,.25);
+  border-radius: 50%;
+  transform: rotateX(70deg) rotateZ(-24deg);
+  transform-style: preserve-3d;
+}
+
+.af-orbit__orbit--two {
+  width: 88%;
+  height: 34rem;
+  border-color: rgba(255,255,255,.12);
+  transform: rotateX(72deg) rotateZ(35deg);
+}
+
+.af-orbit__orbit i {
+  position: absolute;
+  top: 50%;
+  left: -0.6rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--af-accent);
+  box-shadow: 0 0 2rem rgba(200,255,77,.9);
+}
+
+.af-orbit__orbit--two i {
+  top: auto;
+  right: 15%;
+  bottom: -0.6rem;
+  left: auto;
+  width: .8rem;
+  height: .8rem;
+  background: #f6f6ef;
+}
+
+.af-orbit__platform {
+  position: absolute;
+  bottom: 13%;
+  width: 66%;
+  height: 17%;
+  border: 1px solid rgba(200,255,77,.24);
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(200,255,77,.16), rgba(200,255,77,.025) 46%, transparent 72%);
+  box-shadow: 0 2rem 8rem rgba(0,0,0,.45), inset 0 1px rgba(255,255,255,.1);
+  transform: rotateX(67deg) translateZ(-3rem);
+}
+
+.af-orbit__product {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(76%, 48rem);
+  aspect-ratio: 0.88;
+  place-items: center;
+  transform: rotateX(var(--af-tilt-y)) rotateY(var(--af-tilt-x)) translateZ(4rem);
+  transform-style: preserve-3d;
+  transition: transform .15s ease-out;
+  animation: af-product-float 6s ease-in-out infinite;
+}
+
+.af-orbit__product-link {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+
+.af-orbit__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 3rem 4rem rgba(0,0,0,.42));
+  mix-blend-mode: screen;
+}
+
+.af-orbit__sculpture {
+  position: relative;
+  display: grid;
+  width: 68%;
+  aspect-ratio: 1;
+  place-items: center;
+  transform: rotateY(-18deg) rotateX(8deg);
+  transform-style: preserve-3d;
+}
+
+.af-orbit__sculpture-core {
+  width: 58%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 31% 69% 56% 44% / 43% 38% 62% 57%;
+  background: radial-gradient(circle at 32% 26%, #efffc2 0, #c8ff4d 13%, #78963a 36%, #25311e 62%, #101711 80%);
+  box-shadow: inset -2rem -2rem 4rem rgba(0,0,0,.52), inset 1rem 1rem 2rem rgba(255,255,255,.24), 0 3rem 8rem rgba(200,255,77,.22);
+  animation: af-core-morph 10s ease-in-out infinite alternate;
+}
+
+.af-orbit__sculpture-ring {
+  position: absolute;
+  width: 92%;
+  height: 34%;
+  border: 1px solid rgba(200,255,77,.75);
+  border-radius: 50%;
+  box-shadow: 0 0 2rem rgba(200,255,77,.17);
+  transform: rotateX(72deg) rotateZ(-28deg) translateZ(1rem);
+}
+
+.af-orbit__sculpture-ring--b {
+  width: 78%;
+  height: 76%;
+  border-color: rgba(255,255,255,.36);
+  transform: rotateY(67deg) rotateZ(28deg);
+}
+
+.af-orbit__float {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 26rem;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 1.2rem;
+  background: rgba(18,23,20,.72);
+  box-shadow: 0 1.2rem 3.5rem rgba(0,0,0,.25);
+  color: rgba(248,248,243,.85);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  backdrop-filter: blur(16px);
+  animation: af-float-card 5s ease-in-out infinite;
+}
+
+.af-orbit__float--top {
+  top: 14%;
+  right: 2%;
+}
+
+.af-orbit__float--bottom {
+  bottom: 18%;
+  left: 0;
+  animation-delay: -2.3s;
+}
+
+.af-orbit__float--bottom strong {
+  color: var(--af-accent);
+  white-space: nowrap;
+}
+
+.af-orbit__float-icon {
+  color: var(--af-accent);
+  font-size: 1.8rem;
+}
+
+.af-orbit__float-dot {
+  flex: 0 0 .8rem;
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  background: var(--af-accent);
+  box-shadow: 0 0 .9rem rgba(200,255,77,.85);
+}
+
+.af-orbit__index {
+  position: absolute;
+  right: 1rem;
+  bottom: 5%;
+  color: rgba(248,248,243,.35);
+  font-size: 1rem;
+  letter-spacing: .18em;
+}
+
+.af-orbit__scroll {
+  position: absolute;
+  bottom: 2.8rem;
+  left: max(calc((100vw - var(--page-width)) / 2), 2rem);
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  color: rgba(248,248,243,.45);
+  font-size: 1rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.af-orbit__scroll span {
+  display: block;
+  width: 3.2rem;
+  height: 1px;
+  background: var(--af-accent);
+  animation: af-scroll-line 1.8s ease-in-out infinite;
+  transform-origin: left;
+}
+
+@keyframes af-product-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -1.2rem; }
+}
+
+@keyframes af-float-card {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -.8rem; }
+}
+
+@keyframes af-halo-breathe {
+  from { transform: scale(.96); opacity: .55; }
+  to { transform: scale(1.04); opacity: 1; }
+}
+
+@keyframes af-core-morph {
+  from { border-radius: 31% 69% 56% 44% / 43% 38% 62% 57%; transform: rotateY(-8deg) rotateZ(-8deg); }
+  to { border-radius: 58% 42% 38% 62% / 51% 62% 38% 49%; transform: rotateY(8deg) rotateZ(8deg); }
+}
+
+@keyframes af-scroll-line {
+  0%, 100% { transform: scaleX(.5); opacity: .5; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+
+/* Subtle depth across product and collection cards */
+.card-wrapper .card__inner {
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease;
+  transform: perspective(100rem) translateZ(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-wrapper:hover .card__inner {
+    transform: perspective(100rem) translateY(-.5rem) rotateX(1.5deg) rotateY(-1.5deg);
+    box-shadow: 0 2rem 4rem rgba(0,0,0,.1);
+  }
+}
+
+.af-features-grid .af-feature {
+  transition: transform .35s ease, border-color .35s ease;
+}
+
+.af-features-grid .af-feature:hover {
+  transform: translateY(-.45rem);
+  border-color: var(--af-accent);
+}
+
+@media screen and (max-width: 989px) {
+  .af-orbit {
+    min-height: auto;
+  }
+
+  .af-orbit__inner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-block: 6.5rem 7rem;
+  }
+
+  .af-orbit__copy {
+    max-width: 70rem;
+  }
+
+  .af-orbit__title {
+    max-width: 12ch;
+    font-size: clamp(5rem, 10vw, 8.5rem);
+  }
+
+  .af-orbit__stage {
+    min-height: min(90vw, 63rem);
+    margin-top: -1rem;
+  }
+
+  .af-orbit__scroll {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .af-orbit__inner {
+    padding-block: 5.5rem 4rem;
+  }
+
+  .af-orbit__eyebrow {
+    margin-bottom: 1.8rem;
+    font-size: 1rem;
+  }
+
+  .af-orbit__title {
+    font-size: clamp(4.6rem, 14vw, 7rem);
+  }
+
+  .af-orbit__description {
+    max-width: 34rem;
+    margin-top: 1.8rem;
+  }
+
+  .af-orbit__actions {
+    gap: 1.6rem;
+    margin-top: 2.4rem;
+  }
+
+  .af-orbit__button {
+    min-height: 5rem;
+    padding-inline: 2rem;
+  }
+
+  .af-orbit__note {
+    margin-top: 2.8rem;
+  }
+
+  .af-orbit__stage {
+    min-height: 37rem;
+  }
+
+  .af-orbit__product {
+    width: 78%;
+  }
+
+  .af-orbit__float {
+    max-width: 19rem;
+    gap: .65rem;
+    padding: .9rem 1.1rem;
+    font-size: .95rem;
+  }
+
+  .af-orbit__float--top {
+    top: 8%;
+    right: -1rem;
+  }
+
+  .af-orbit__float--bottom {
+    bottom: 12%;
+    left: -1rem;
+  }
+
+  .af-orbit__orbit {
+    height: 19rem;
+  }
+
+  .af-orbit__orbit--two {
+    height: 26rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .af-orbit *,
+  .af-orbit *::before,
+  .af-orbit *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+
+  .af-orbit__copy {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .af-scope {
   --af-accent: #c8ff4d;
   --af-accent-ink: #0a0a0a;

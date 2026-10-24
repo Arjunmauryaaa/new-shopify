@@ -1,0 +1,117 @@
+{{ 'af-theme.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'af-motion.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign hero_product = section.settings.featured_product
+  if hero_product == blank
+    assign hero_collection = collections[section.settings.fallback_collection]
+    if hero_collection != blank
+      assign hero_product = hero_collection.products.first
+    endif
+  endif
+-%}
+
+<section
+  class="af-orbit color-{{ section.settings.color_scheme }}"
+  id="AFOrbit-{{ section.id }}"
+  data-af-orbit
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  <div class="af-orbit__grid" aria-hidden="true"></div>
+  <div class="af-orbit__inner page-width">
+    <div class="af-orbit__copy" data-af-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="af-orbit__eyebrow"><span></span>{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="af-orbit__title">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.description != blank -%}
+        <div class="af-orbit__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+      <div class="af-orbit__actions">
+        {%- if hero_product != blank -%}
+          <a class="af-orbit__button" href="{{ hero_product.url }}">
+            {{ section.settings.button_label | escape }}
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="af-orbit__text-link" href="{{ routes.all_products_collection_url }}">Explore the collection</a>
+        {%- else -%}
+          <a class="af-orbit__button" href="{{ routes.all_products_collection_url }}">
+            {{ section.settings.button_label | escape }}
+            <span aria-hidden="true">↗</span>
+          </a>
+        {%- endif -%}
+      </div>
+      <div class="af-orbit__note">
+        <span class="af-orbit__note-mark" aria-hidden="true">✳</span>
+        <span>{{ section.settings.note | escape }}</span>
+      </div>
+    </div>
+
+    <div class="af-orbit__stage" data-af-tilt>
+      <div class="af-orbit__halo af-orbit__halo--one" aria-hidden="true"></div>
+      <div class="af-orbit__halo af-orbit__halo--two" aria-hidden="true"></div>
+      <div class="af-orbit__orbit af-orbit__orbit--one" aria-hidden="true"><i></i></div>
+      <div class="af-orbit__orbit af-orbit__orbit--two" aria-hidden="true"><i></i></div>
+      <div class="af-orbit__platform" aria-hidden="true"></div>
+
+      <div class="af-orbit__product" data-af-product-card>
+        {%- if hero_product != blank and hero_product.featured_media != blank -%}
+          <a class="af-orbit__product-link" href="{{ hero_product.url }}" aria-label="Discover {{ hero_product.title | escape }}">
+            {{ hero_product.featured_media.preview_image
+              | image_url: width: 1200
+              | image_tag:
+                widths: '360, 540, 720, 960, 1200',
+                sizes: '(min-width: 990px) 42vw, 90vw',
+                loading: 'eager',
+                fetchpriority: 'high',
+                class: 'af-orbit__image'
+            }}
+          </a>
+        {%- else -%}
+          <div class="af-orbit__sculpture" aria-hidden="true">
+            <div class="af-orbit__sculpture-core"></div>
+            <div class="af-orbit__sculpture-ring af-orbit__sculpture-ring--a"></div>
+            <div class="af-orbit__sculpture-ring af-orbit__sculpture-ring--b"></div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="af-orbit__float af-orbit__float--top" data-af-float>
+        <span class="af-orbit__float-icon" aria-hidden="true">✦</span>
+        <span>{{ section.settings.float_top | escape }}</span>
+      </div>
+      <div class="af-orbit__float af-orbit__float--bottom" data-af-float>
+        <span class="af-orbit__float-dot" aria-hidden="true"></span>
+        {%- if hero_product != blank -%}
+          <span>{{ hero_product.title | escape }}</span>
+          <strong>{{ hero_product.price | money }}</strong>
+        {%- else -%}
+          <span>{{ section.settings.float_bottom | escape }}</span>
+        {%- endif -%}
+      </div>
+      <span class="af-orbit__index" aria-hidden="true">01 / 03</span>
+    </div>
+  </div>
+  <div class="af-orbit__scroll" aria-hidden="true"><span></span> Scroll to explore</div>
+</section>
+
+{% schema %}
+{
+  "name": "AF Orbit hero",
+  "tag": "section",
+  "class": "section-af-orbit-hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A considered edit for everyday living" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Make space for\nbetter things." },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Discover thoughtful pieces that bring a little more intention to the everyday.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Discover the edit" },
+    { "type": "text", "id": "note", "label": "Small note", "default": "Good design. Better every day." },
+    { "type": "text", "id": "float_top", "label": "Floating note", "default": "Objects with a point of view" },
+    { "type": "text", "id": "float_bottom", "label": "Fallback product note", "default": "The everyday, elevated" },
+    { "type": "product", "id": "featured_product", "label": "Featured product" },
+    { "type": "collection", "id": "fallback_collection", "label": "Fallback collection", "default": "all" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-6" }
+  ],
+  "presets": [{ "name": "AF Orbit hero" }]
+}
+{% endschema %}

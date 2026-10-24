@@ -1,66 +1,25 @@
 ﻿{
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "eyebrow": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Thoughtful tools for your everyday</p>",
-            "text_style": "uppercase"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Make room for better work",
-            "heading_size": "h0"
-          }
-        },
-        "intro": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Desk essentials and considered objects to bring clarity, comfort, and focus to your workspace.</p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop workspace essentials",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "eyebrow",
-        "heading",
-        "intro",
-        "button"
-      ],
+    "orbit_hero": {
+      "type": "af-orbit-hero",
       "settings": {
-        "image_overlay_opacity": 24,
-        "image_height": "large",
-        "desktop_content_position": "middle-left",
-        "show_text_box": true,
-        "image_behavior": "none",
-        "desktop_content_alignment": "left",
-        "color_scheme": "scheme-2",
-        "mobile_content_alignment": "left",
-        "stack_images_on_mobile": false,
-        "show_text_below": true
+        "eyebrow": "A considered edit for everyday living",
+        "heading": "Make space for\nbetter things.",
+        "description": "<p>Discover thoughtful pieces that bring a little more intention to the everyday.</p>",
+        "button_label": "Discover the edit",
+        "note": "Good design. Better every day.",
+        "float_top": "Objects with a point of view",
+        "float_bottom": "The everyday, elevated",
+        "fallback_collection": "all",
+        "color_scheme": "scheme-6"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "The considered workspace",
+        "title": "A few things worth keeping",
         "heading_size": "h1",
-        "description": "<p>Useful, well-chosen pieces that make your desk feel like your own.</p>",
+        "description": "<p>Thoughtful finds, selected to make everyday moments feel considered.</p>",
         "show_description": true,
         "description_style": "body",
         "collection": "all",
@@ -79,13 +38,26 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
-        "padding_top": 48,
-        "padding_bottom": 52
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "features": {
+      "type": "af-features",
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "title": "Chosen with intention", "description": "A focused edit of useful objects, considered for form and function." } },
+        "feature_2": { "type": "feature", "settings": { "title": "Made for real life", "description": "Pieces that earn their place in the everyday, beyond the first impression." } },
+        "feature_3": { "type": "feature", "settings": { "title": "The details matter", "description": "Thoughtful materials, tactile finishes, and small moments of delight." } }
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"],
+      "settings": {
+        "eyebrow": "Our point of view",
+        "heading": "A little more intention in the everyday.",
+        "color_scheme": "scheme-7",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     }
   },
-  "order": [
-    "image_banner",
-    "featured_collection"
-  ]
+  "order": ["orbit_hero", "featured_collection", "features"]
 }
