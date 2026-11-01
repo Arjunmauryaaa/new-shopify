@@ -45,9 +45,7 @@ You have two options:
 
 ### Option A — Upload zip (matches the screen you showed me)
 
-1. Zip the contents of this `shopify-theme/` folder (the zip's root
-   should contain `assets/`, `config/`, `layout/`, etc. directly — not a
-   nested folder).
+1. Upload the prepared `Health-Personal-Care-Shopify-theme.zip` from the workspace, or create a ZIP containing the theme's `assets/`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, and `templates/` folders at its root. Do not include the nested `next-storefront/` app or `.git/`.
 2. In Shopify admin: **Online Store → Themes → Add theme → Upload zip
    file**, and select the zip.
 3. Click **Publish** when you're ready to make it live, or **Preview**
@@ -56,7 +54,7 @@ You have two options:
 ### Option B — Push with Shopify CLI (recommended for iterating)
 
 ```bash
-cd shopify-theme
+cd shopify
 npx @shopify/cli theme dev --store your-store.myshopify.com    # live local preview
 npx @shopify/cli theme push --store your-store.myshopify.com   # push to a theme on your store
 ```
