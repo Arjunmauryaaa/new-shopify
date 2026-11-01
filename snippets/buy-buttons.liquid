@@ -70,6 +70,7 @@
               assign quantity_rule_soldout = true
             endif
           -%}
+          {%- if block.settings.show_add_to_cart != false -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
@@ -93,6 +94,7 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
+          {%- endif -%}
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}

@@ -1,5 +1,11 @@
 # AeroFlex — Shopify theme (premium single-product landing page)
 
+## Health & Personal Care storefront
+
+The home page is configured to feature the `health-personal-care` collection, and the `product.landing-page` template is a concise product page for Meta ad traffic. Its accelerated checkout button sends the selected variant to Shopify's hosted checkout. Complementary products can be configured in Shopify Search & Discovery and appear in the recommendation shelf below the product content. Sale pricing uses Shopify's native Price and Compare-at price fields.
+
+See [SHOPIFY_ADMIN_SETUP.md](./SHOPIFY_ADMIN_SETUP.md) for catalog, media, pricing, recommendations, payments, ads, and publishing steps. Product photos/videos, truthful compare-at prices, related items, payment methods, and collection contents must be set in Shopify Admin.
+
 This is a native Shopify theme, built on top of **Dawn** (Shopify's
 open-source reference theme). It adds a custom product template and a set
 of premium marketing sections so any single product can be presented as a
